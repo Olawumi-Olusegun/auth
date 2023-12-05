@@ -2,6 +2,7 @@
   "name": "auth-backend",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "Backend/src/index.ts",
   "scripts": {
     "build": "npm install && npm install --prefix Frontend && npm run build --prefix Frontend",
