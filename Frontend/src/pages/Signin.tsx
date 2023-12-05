@@ -50,7 +50,7 @@ export default function Signin() {
 
       dispatch(signInSuccess(data));
       reset();
-      return navigate('/');
+      return navigate('/', { replace: true });
 
     } catch (error) {
       dispatch(signInFailure((error as any)?.message));

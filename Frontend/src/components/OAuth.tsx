@@ -34,12 +34,15 @@ export default function OAuth() {
           });
 
           const { data, message } = await response.json();
+         
           if(!response.ok) {
-            dispatch(signInFailure(message));
+            return dispatch(signInFailure(message));
           }
 
           dispatch(signInSuccess(data));
-          navigate('/');
+
+          return navigate('/', { replace: true });
+          
         } catch (error) {
           dispatch(signInFailure((error as any)?.message || ""));
         } finally {

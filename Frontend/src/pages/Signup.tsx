@@ -51,7 +51,7 @@ export default function Signup() {
         dispatch(signUpFailure(message));
       }
       dispatch(signUpSuccess(data))
-      navigate("/");
+      return navigate('/', { replace: true });
 
     } catch (error) {
       dispatch(signUpFailure((error as any)?.message));

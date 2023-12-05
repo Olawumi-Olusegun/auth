@@ -96,10 +96,6 @@ export const google = async (req: Request, res: Response, next: NextFunction) =>
 
         const userExist = await UserModel.findOne({ email });
 
-        if(userExist?.loginProvider == "credentials") {
-            return res.status(httpStatusCode.BAD_REQUEST).json({success: false, message: "Invalid credentials"});
-        }
-
         if(!userExist) {
             // generate an eight digit random number
 
@@ -126,6 +122,10 @@ export const google = async (req: Request, res: Response, next: NextFunction) =>
             })
             .status(200)
             .json({ success: true, message: "User signup successfully ", data });
+        }
+
+        if(userExist?.loginProvider == "credentials") {
+            return res.status(httpStatusCode.BAD_REQUEST).json({success: false, message: "Invalid credentials"});
         }
 
         const expiryDate = new Date(Date.now() + 3600000);
