@@ -34,7 +34,7 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
         next(error);
     }
 }
-// BRve4VUBauvYZHPK
+
 export const signin = async (req: Request, res: Response, next: NextFunction) => {
   
     const { email, password } = req.body;
@@ -47,10 +47,14 @@ export const signin = async (req: Request, res: Response, next: NextFunction) =>
             return res.status(401).json({success: false,  message: `user does not exist`});
         }
 
+        if(userExist?.loginProvider == "google") {
+            return res.status(httpStatusCode.BAD_REQUEST).json({success: false, message: "Invalid credentials"});
+        }
+
         const isvalidPassword  = await userExist.isvalidPassword(password);
 
         if(!isvalidPassword) {
-            return res.status(httpStatusCode.UNAUTHORIZED).json({success: false, message: "Invalid email and/or password"});
+            return res.status(httpStatusCode.UNAUTHORIZED).json({success: false, message: "Invalid login"});
         }
 
         const expiryDate = new Date(Date.now() + 3600000);
@@ -92,11 +96,15 @@ export const google = async (req: Request, res: Response, next: NextFunction) =>
 
         const userExist = await UserModel.findOne({ email });
 
+        if(userExist?.loginProvider == "credentials") {
+            return res.status(httpStatusCode.BAD_REQUEST).json({success: false, message: "Invalid credentials"});
+        }
+
         if(!userExist) {
             // generate an eight digit random number
 
             const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
-            const createUser = new UserModel({ username, email, avatar, password: generatedPassword })
+            const createUser = new UserModel({ username, email, avatar, password: generatedPassword, loginProvider: "google" })
             const newUser = await createUser.save();
 
             const expiryDate = new Date(Date.now() + 3600000);

@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import {  Response, NextFunction } from 'express';
 import { isValidObjectId } from 'mongoose';
 import UserModel from '../models/user.model';
 import { httpStatusCode } from '../utils/httpStatusCodes';
