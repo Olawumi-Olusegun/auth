@@ -7,7 +7,7 @@
     "watch": "npx tsc -w",
     "build": "npm install && tsc && npm install --prefix Frontend && npm run build --prefix Frontend",
     "start": "node Backend/dist/index.js",
-    "dev": "nodemon Backend/dist/index.js"
+    "dev": "nodemon Backend/src/index.ts"
   },
   "keywords": [],
   "author": "",

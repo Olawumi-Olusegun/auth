@@ -159,11 +159,13 @@ export default function Profile() {
 
   const handleUserSignOut = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+   
     try {
       dispatch(userSignoutStart());
       const response = await fetch('/api/v1/auth/signout');
-    
+
       const { message } = await response.json();
+      console.log("message")
       if(!response.ok) {
         return dispatch(userSignoutFailure(message));
       }
