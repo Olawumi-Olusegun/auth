@@ -21,12 +21,12 @@ app.use(express.static(path.join(dirname, '/Frontend/dist')))
 app.use(express.urlencoded({ extended: true}));
 app.use(cookieParser());
 
-app.get("*", (req: Request, res: Response) => {
-     res.sendFile(path.join(dirname, "Frontend", "dist", 'index.html'));
-});
-
 app.use("/api/v1", userRoute);
 app.use("/api/v1", authRoute);
+
+app.get("*", (req: Request, res: Response) => {
+    res.sendFile(path.join(dirname, "Frontend", "dist", 'index.html'));
+});
 
 app.use((err: ErrorWithStatus, req: Request, res: Response, next: NextFunction) => {
     const statusCode = err.statusCode || 500;
