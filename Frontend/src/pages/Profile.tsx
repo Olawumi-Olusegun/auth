@@ -131,6 +131,7 @@ export default function Profile() {
 
   const handleUserDeleteRequest = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    if(!currentUser?.id) return;
     try {
       dispatch(userDeleteStart());
       const response = await fetch(`/api/v1/user/delete/${currentUser?.id}`, {

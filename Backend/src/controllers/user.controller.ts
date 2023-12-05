@@ -64,7 +64,7 @@ export const deleteUser = async (req: RequestWithUserId, res: Response, next: Ne
 
     const currentUserId = req.userId;
 
-    if(!isValidObjectId((req as any).user.id)) {
+    if(!isValidObjectId(currentUserId)) {
         return res.status(httpStatusCode.BAD_REQUEST).json({success: false, message: "Invalid credentials"});
     }
 
