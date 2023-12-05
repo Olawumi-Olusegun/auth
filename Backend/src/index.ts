@@ -12,7 +12,7 @@ dotenv.config();
 
 const app: Application = express();
 
-const PORT = process.env.PORT;
+const PORT = Number(process.env.PORT) || 2020;
 
 const dirname = path.resolve();
 
@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true}));
 app.use(cookieParser());
 
 app.get("*", (req: Request, res: Response) => {
-     res.sendFile(path.join(dirname, "client", "dist", 'index.html'));
+     res.sendFile(path.join(dirname, "Frontend", "dist", 'index.html'));
 });
 
 app.use("/api/v1", userRoute);

@@ -79,11 +79,11 @@ export const signin = async (req: Request, res: Response, next: NextFunction) =>
 }
 
 export const google = async (req: Request, res: Response, next: NextFunction) => {
-  
+
     let { username, email, avatar } = req.body;
-    
+
     username = username.split(" ").join("").toLowerCase() + Math.floor(Math.random() * 1000).toString();
-    
+
     try {
 
         if(!email || !username) {
@@ -93,7 +93,8 @@ export const google = async (req: Request, res: Response, next: NextFunction) =>
         const userExist = await UserModel.findOne({ email });
 
         if(!userExist) {
-            // generate an eight digit random number 
+            // generate an eight digit random number
+
             const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
             const createUser = new UserModel({ username, email, avatar, password: generatedPassword })
             const newUser = await createUser.save();

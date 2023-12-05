@@ -1,11 +1,13 @@
 import { Outlet } from 'react-router-dom';
-import {Header, Footer} from './../index';
+import { Header, Footer } from './../index';
 
 export default function PublicLayout() {
   return (
-    <div>
+    <div className='min-h-screen flex flex-col bg-white dark:bg-gray-900'>
         <Header />
-        <Outlet />
+        <div className='flex-1'>
+          <Outlet />
+        </div>
         <Footer />
     </div>
   )
