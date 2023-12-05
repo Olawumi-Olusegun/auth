@@ -2,12 +2,12 @@
   "name": "auth-backend",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "main": "Backend/src/index.ts",
   "scripts": {
-    "build": "npm install && npm install --prefix Frontend && npm run build --prefix Frontend",
-    "start": "node Backend/src/index.ts",
-    "dev": "nodemon Backend/src/index.ts"
+    "watch": "npx tsc -w",
+    "build": "npm install && tsc && npm install --prefix Frontend && npm run build --prefix Frontend",
+    "start": "node Backend/dist/index.js",
+    "dev": "nodemon Backend/dist/index.js"
   },
   "keywords": [],
   "author": "",
