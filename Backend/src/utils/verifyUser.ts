@@ -28,11 +28,11 @@ export const verifyToken = async (req: RequestWithUserId, res: Response, next: N
             return res.status(400).json({ success: false, message: "Invalid user"});
         }
 
-        req.userId = userExist._id.toString();
+        req.userId = userExist.id;
     
         next();
         
     } catch (error) {
-       next(next);
+       next(error);
     }
 } 

@@ -18,6 +18,10 @@ export const updateUser = async (req: RequestWithUserId, res: Response, next: Ne
         return res.status(httpStatusCode.BAD_REQUEST).json({success: false, message: "Invalid credentials!"});
     }
 
+    if(!isValidObjectId(userId)) {
+        return res.status(httpStatusCode.BAD_REQUEST).json({success: false, message: "Invalid userId!"});
+    }
+
     if(currentUserId !== userId) {
         return res.status(httpStatusCode.BAD_REQUEST).json({success: false, message: "Invalid credentials!!"});
     }
@@ -43,7 +47,7 @@ export const updateUser = async (req: RequestWithUserId, res: Response, next: Ne
     }
 
     const data = {
-        id: updatedUser?._id,
+        id: updatedUser?.id,
         username: updatedUser?.username,
         email: updatedUser?.email,
         avatar: updatedUser?.avatar,

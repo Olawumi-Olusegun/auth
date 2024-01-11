@@ -97,7 +97,6 @@ export const google = async (req: Request, res: Response, next: NextFunction) =>
         const userExist = await UserModel.findOne({ email });
 
         if(!userExist) {
-            // generate an eight digit random number
 
             const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
             const createUser = new UserModel({ username, email, avatar, password: generatedPassword, loginProvider: "google" })
